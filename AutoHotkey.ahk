@@ -5,7 +5,7 @@ SendMode Input  ; Recommended for new scripts due to its superior speed and reli
 SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 
 ;==============================
-;=           リンク
+; リンク
 ;==============================
 
 ; Winのショートカット一覧: https://pc-karuma.net/windows-10-keyboard-shortcuts-list/
@@ -13,152 +13,147 @@ SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 
 
 ;==============================
-;=     Change Key の設定
+; Change Key の設定
 ;==============================
 ; DL: https://forest.watch.impress.co.jp/library/software/changekey/
-; 左Ctrl    -> 無変換
-; 無変換    -> 左Ctrl
-; 全角/半角 -> F13
-; 変換      -> F14
+; Left Ctrl       -> F13
+; Hankaku/Zenkaku -> F14
+; Muhenkan        -> Left Ctrl
+; Henkan          -> F15
+; Katakana        -> F16
 
-vk1D::Send, {Blind}{Ctrl}
+; |Key|ScanCode|
+; |---|--------|
+; |F13| 0x0064 |
+; |F14| 0x0065 |
+; |F15| 0x0066 |
+; |F16| 0x0067 |
+; |F17| 0x0068 |
+; |F18| 0x0069 |
+; |F19| 0x006A |
+; |F20| 0x006B |
+; |F21| 0x006C |
+; |F22| 0x006D |
+; |F23| 0x006E |
+; |F24| 0x0076 |
 
 
 ;==============================
-;=    キーの指定方法のメモ
+; キーの指定方法のメモ
 ;==============================
-;　無変換キー vk1Dsc07B
-;　SHIFT +
-;　Ctrl ^
-;　Alt !
-;　;(セミコロン)vkBBsc027
-;　:(コロン) vkBAsc028
-;　,(カンマ) vkBCsc033
-;　.(ピリオド) vkBEsc034
-;　Space vk20sc039
+;　SHIFT       +
+;　Ctrl        ^
+;　Alt         !
+;　Windowsキー #
+;　無変換キー  vk1D
+;　変換キー    vk1C
+;　;           vkBB
+;　:           vkBA
+;　,           vkBC
+;　.           vkBE
+;　Space       vk20
 ;　その他はAutoHotKey Wikiのキーリスト参照
 
 
 ;==============================
-;=       vk1D(無変換)
+; Left Ctrl
 ;==============================
 
-vk1D & Space::Send, {Blind}^{Space} ; IME-オン/オフ
+F13 & Space::Send, {Blind}^{Space} ; IME-オン/オフ
 
 ; カーソル操作
-vk1D & i::Send,{Blind}{Up}
-vk1D & j::Send,{Blind}{Left}
-vk1D & k::Send,{Blind}{Down}
-vk1D & l::Send,{Blind}{Right}
-vk1D & a::Send, {Blind}{Home}    ; 文頭
-vk1D & e::Send, {Blind}{End}     ; 文末
-vk1D & @::Send, {Blind}{PgUp}    ; 行頭
-vk1D & vkBA::Send, {Blind}{PgDn} ; 行末
+F13 & i::Send,    {Blind}{Up}
+F13 & j::Send,    {Blind}{Left}
+F13 & k::Send,    {Blind}{Down}
+F13 & l::Send,    {Blind}{Right}
+F13 & a::Send,    {Blind}{Home}  ; 文頭
+F13 & e::Send,    {Blind}{End}   ; 文末
+F13 & @::Send,    {Blind}{PgUp}  ; 行頭
+F13 & vkBA::Send, {Blind}{PgDn}  ; 行末
 
 ; テキスト操作
-vk1D & h::Send, {Blind}{Backspace}
-vk1D & d::Send, {Blind}{Del}
-vk1D & o::Send, {Blind}{Enter}
-vk1D & s::Send, {Blind}+{home} ; 文頭まで選択
-vk1D & f::Send, {Blind}+{End}  ; 文末まで選択
-;vk1C & w::Send, {Blind}{End}+{Home}{BS} ; 一行削除
-;vk1C & r::Send, {Blind}{End}+{Home}^{c} ; 一行コピー
-;vk1C & e::Send, {Blind}{End}+{Home}^{x} ; 一行切り取り
-;^Enter::Send, {Blind}{End}{Enter} ; 下に一行挿入
+F13 & h::Send, {Blind}{Backspace}
+F13 & d::Send, {Blind}{Del}
+F13 & o::Send, {Blind}{Enter}
+F13 & s::Send, {Blind}+{home} ; 文頭まで選択
+F13 & f::Send, {Blind}+{End}  ; 文末まで選択
+;F13 & w::Send, {Blind}{End}+{Home}{BS} ; 一行削除
+;F13 & r::Send, {Blind}{End}+{Home}^{c} ; 一行コピー
+;F13 & e::Send, {Blind}{End}+{Home}^{x} ; 一行切り取り
+;^Enter::Send, {Blind}{End}{Enter}      ; 下に一行挿入
+
 
 ;「無変換+上段キー」でファンクションキーの動作をさせる
-vk1D & 1::Send,{Blind}{F1}
-vk1D & 2::Send,{Blind}{F2}
-vk1D & 3::Send,{Blind}{F3}
-vk1D & 4::Send,{Blind}{F4}
-vk1D & 5::Send,{Blind}{F5}
-vk1D & 6::Send,{Blind}{F6}
-vk1D & 7::Send,{Blind}{F7}
-vk1D & 8::Send,{Blind}{F8}
-vk1D & 9::Send,{Blind}{F9}
-vk1D & 0::Send,{Blind}{F10}
-vk1D & -::Send,{Blind}{F11}
-vk1D & ^::Send,{Blind}{F12}
-
-; ウィンドウ操作
-vk1D & w::Send, ^{w} ; 表示中のアプリを閉じる
-
-
-;=============================
-;=        vk1C(変換)
-;=============================
-
-;tab移動など
-vk1C & o::Send,{Blind}^{Tab}
-vk1C & u::Send,{Blind}^+{Tab}
-vk1C & l::AltTab              ; 
-vk1C & j::ShiftAltTab         ; 
-vk1C & n::Send,{Blind}!{Left}
-vk1C & ,::Send,{Blind}!{Right}
-vk1D & vk1C::Send,{Blind}{vkF3sc029}
+F13 & 1::Send, {Blind}{F1}
+F13 & 2::Send, {Blind}{F2}
+F13 & 3::Send, {Blind}{F3}
+F13 & 4::Send, {Blind}{F4}
+F13 & 5::Send, {Blind}{F5}
+F13 & 6::Send, {Blind}{F6}
+F13 & 7::Send, {Blind}{F7}
+F13 & 8::Send, {Blind}{F8}
+F13 & 9::Send, {Blind}{F9}
+F13 & 0::Send, {Blind}{F10}
+F13 & -::Send, {Blind}{F11}
+F13 & ^::Send, {Blind}{F12}
 
 
 ;==============================
-;=    vkF4->F13(全角/半角)
+; Hankaku/Zenkaku
 ;==============================
 
-; 仮想デスクトップ切り替え
-;F13 & a::Send, #^{d}     ; 新しい仮想デスクトップを作成
-;F13 & w::Send, #^{F4}    ; 使用中の仮想デスクトップを閉じる
-;F13 & f::Send, #^{Right} ; 右の仮想デスクトップに切り替え
-;F13 & d::Send, #^{Left}  ; 左の仮想デスクトップに切り替え
-;F13 & v::Send, #{Tab}    ; タスクビューを表示（アプリ切り替え）
-
-F13 & e::Send, #{e} ; エクスプローラーを起動
-F13 & s::Send, #{s} ; WebとWindows（アプリ、ファイル、設定）を検索
-F13 & t::Send, #{t} ; タスクバーでアプリを切り替える
+F14 & e::Send, #{e} ; エクスプローラーを起動
+F14 & s::Send, #{s} ; WebとWindows（アプリ、ファイル、設定）を検索
+F14 & t::Send, #{t} ; タスクバーでアプリを切り替える
 
 ; 該当するタスクバーのアプリを起動
-F13 & 1::Send, #{1}
-F13 & 2::Send, #{2}
-F13 & 3::Send, #{3}
-F13 & 4::Send, #{4}
-F13 & 5::Send, #{5}
-F13 & 6::Send, #{6}
-F13 & 7::Send, #{7}
-F13 & 8::Send, #{8}
-F13 & 9::Send, #{9}
+F14 & 1::Send, #{1}
+F14 & 2::Send, #{2}
+F14 & 3::Send, #{3}
+F14 & 4::Send, #{4}
+F14 & 5::Send, #{5}
+F14 & 6::Send, #{6}
+F14 & 7::Send, #{7}
+F14 & 8::Send, #{8}
+F14 & 9::Send, #{9}
 
 ; ウィンドウ操作
-F13 & j::Send, #{Left}  ; 左寄せ
-F13 & l::Send, #{Right} ; 右寄せ
-F13 & i::Send, #{Up}    ; 最大化
-F13 & k::Send, #{Down}  ; 元に戻す or 最小化
-;F13 & +i::Send, #{Up}   ; アクティブなウィンドウを上下いっぱいに表示
+F14 & j::Send, #{Left}  ; 左寄せ
+F14 & l::Send, #{Right} ; 右寄せ
+F14 & i::Send, #{Up}    ; 最大化
+F14 & k::Send, #{Down}  ; 元に戻す or 最小化
+;F14 & +i::Send, #{Up}   ; アクティブなウィンドウを上下いっぱいに表示
+
+
+;=============================
+; Henkan
+;=============================
+
+; Tab移動など
+F15 & o::Send, {Blind}^{Tab}
+F15 & u::Send, {Blind}^+{Tab}
+F15 & l::AltTab
+F15 & j::ShiftAltTab
+F15 & n::Send, {Blind}!{Left}
+F15 & ,::Send, {Blind}!{Right}
+;F13 & F15::Send,{Blind}{vkF3sc029}
 
 
 ;==============================
-;=      vkF2->F14(Kana)
+; Katakana
 ;==============================
 
 ; 仮想デスクトップ切り替え
-F14 & a::Send, #^{d}     ; 新しい仮想デスクトップを作成
-F14 & w::Send, #^{F4}    ; 使用中の仮想デスクトップを閉じる
-F14 & l::Send, #^{Right} ; 右の仮想デスクトップに切り替え
-F14 & j::Send, #^{Left}  ; 左の仮想デスクトップに切り替え
-F14 & i::Send, #{Tab}    ; タスクビューを表示（アプリ切り替え）
+F16 & a::Send, #^{d}     ; 新しい仮想デスクトップを作成
+F16 & w::Send, #^{F4}    ; 使用中の仮想デスクトップを閉じる
+F16 & l::Send, #^{Right} ; 右の仮想デスクトップに切り替え
+F16 & j::Send, #^{Left}  ; 左の仮想デスクトップに切り替え
+F16 & i::Send, #{Tab}    ; タスクビューを表示（アプリ切り替え）
 
 
 ;==============================
-;=         その他
+; その他
 ;==============================
-
-; マウス操作
->!u:: MouseClick, Left
->!o:: MouseClick, Right
->!i:: MouseMove    0, -50, 0, R
->!+i:: MouseMove   0, -10, 0, R
->!k:: MouseMove    0,  50, 0, R
->!+k:: MouseMove   0,  10, 0, R
->!j:: MouseMove  -50,   0, 0, R
->!+j:: MouseMove -10,   0, 0, R
->!l:: MouseMove   50,   0, 0, R
->!+l:: MouseMove  10,   0, 0, R
 
 ; ウィンドウ操作
 ^q::Send, !{F4} ; 閉じる（「^w」が閉じない時用）
@@ -166,12 +161,23 @@ F14 & i::Send, #{Tab}    ; タスクビューを表示（アプリ切り替え�
 ; 便利ツール
 +^!s::Send, #+s ; スクリーンショット
 
+; マウス操作
+!u::  MouseClick, Left
+!o::  MouseClick, Right
+!i::  MouseMove   0, -50, 0, R
+!+i:: MouseMove   0, -10, 0, R
+!k::  MouseMove   0,  50, 0, R
+!+k:: MouseMove   0,  10, 0, R
+!j::  MouseMove -50,   0, 0, R
+!+j:: MouseMove -10,   0, 0, R
+!l::  MouseMove  50,   0, 0, R
+!+l:: MouseMove  10,   0, 0, R
+
 
 ;sandSの設定
 ;Space Up:: Send, % "{Shift Up}" (A_TimeSincePriorHotkey < 200 ? " " : "")
 ;+Space:: Send, +{Space}
 ;Space:: RShift
 
-; ウィンドウ移動 [vk1C -> 変換]
-;vk1C & Tab::Send, #+{Right}
-
+; ウィンドウ移動 [F15 -> 変換]
+;F15 & Tab::Send, #+{Right}
