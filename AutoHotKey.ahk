@@ -187,12 +187,13 @@ Alt & Tab::AltTabAndMenu
 ; 環境変数は使わなくてもいいけどGistで公開する際のユーザー名マスク用途で使っている
 ; 同じキーマップを使いたくなったらコメントアウトする
 ; 無変換 + E = スクリプト編集
-~vk1D & E::
-    Run, "%USERPROFILE%\AppData\Local\Programs\Microsoft VS Code\Code.exe" "%USERPROFILE%\Documents\Gist\AutoHotkey"
-    Return
+; ~vk1D & E::
+;     Run, "%USERPROFILE%\AppData\Local\Programs\Microsoft VS Code\Code.exe" "%USERPROFILE%\Documents\Gist\AutoHotkey"
+;     Return
 
 ; ReloadのR
 ~vk1D & R::Reload               ; 無変換 + R = スクリプトのリロード
+
 
 ;------------------------------------------------------------------------------
 ;   第１弾 カーソル移動
@@ -201,38 +202,31 @@ Alt & Tab::AltTabAndMenu
 ;       ホームポジションからカーソルキーが使えるとマウスよりも便利になる
 ;------------------------------------------------------------------------------
 
-; Vimエディタ派生だけど他のアプリでもよく使われてるので慣れると流用しやすい
-~vk1D & H::Send,{Blind}{Left}    ; 無変換 + H = 左カーソルキー
-~vk1D & J::Send,{Blind}{Down}    ; 無変換 + J = 下カーソルキー
-~vk1D & K::Send,{Blind}{Up}      ; 無変換 + K = 上カーソルキー
+~vk1D & J::Send,{Blind}{Left}    ; 無変換 + J = 左カーソルキー
+~vk1D & K::Send,{Blind}{Down}    ; 無変換 + K = 下カーソルキー
+~vk1D & I::Send,{Blind}{Up}      ; 無変換 + I = 上カーソルキー
 ~vk1D & L::Send,{Blind}{Right}   ; 無変換 + L = 右カーソルキー
 
-; 片手でカーソル操作したいこともあるので追加
-~vk1C & H::Send,{Blind}{Left}    ; 変換 + H = 左カーソルキー
-~vk1C & J::Send,{Blind}{Down}    ; 変換 + J = 下カーソルキー
-~vk1C & K::Send,{Blind}{Up}      ; 変換 + K = 上カーソルキー
+; 片手用
+~vk1D & B::Send,{Blind}{Left}    ; 無変換 + B = 左カーソルキー
+~vk1D & V::Send,{Blind}{Down}    ; 無変換 + V = 下カーソルキー
+~vk1D & G::Send,{Blind}{Up}      ; 無変換 + G = 上カーソルキー
+~vk1D & F::Send,{Blind}{Right}   ; 無変換 + F = 右カーソルキー
+~vk1C & J::Send,{Blind}{Left}    ; 変換 + J = 左カーソルキー
+~vk1C & K::Send,{Blind}{Down}    ; 変換 + K = 下カーソルキー
+~vk1C & I::Send,{Blind}{Up}      ; 変換 + I = 上カーソルキー
 ~vk1C & L::Send,{Blind}{Right}   ; 変換 + L = 右カーソルキー
 
 ; カーソルを一気に端に移動させられるようにしておく
-; また、Excelのシート移動も可能にしておく
-; 覚えやすさのため、左右のカーソルキー(H, L)の近くに置く
-; 筆者のキーボード配列用
-~vk1D & Y::Send,{Blind}{Home}    ; 無変換 + Y = Home
-~vk1D & \::Send,{Blind}{End}     ; 無変換 + \ = End
-~vk1C & Y::Send,{Blind}{PgUp}    ; 変換 + Y = Page Up
-~vk1C & \::Send,{Blind}{PgDn}    ; 変換 + \ = Page Down
+~vk1D & A::Send,{Blind}{Home}    ; 無変換 + A = Home
+~vk1D & E::Send,{Blind}{End}     ; 無変換 + E = End
+; ~vk1D & A::Send,{Blind}{PgUp}    ; 無変換 + A = Page Up
+; ~vk1D & E::Send,{Blind}{PgDn}    ; 無変換 + E = Page Down
+~vk1C & U::Send,{Blind}{Home}    ; 変換 + U = Home
+~vk1C & O::Send,{Blind}{End}     ; 変換 + O = End
+~vk1C & M::Send,{Blind}{PgUp}    ; 変換 + M = Page Up
+~vk1C & .::Send,{Blind}{PgDn}    ; 変換 + . = Page Down
 
-; 日本語キーボード用
-; ~vk1D & Y::Send,{Blind}{Home}    ; 無変換 + Y = Home
-; ~vk1D & vkBB::Send,{Blind}{End}  ; 無変換 + ; = End
-; ~vk1C & Y::Send,{Blind}{PgUp}    ; 変換 + Y = Page Up
-; ~vk1C & vkBB::Send,{Blind}{PgDn} ; 変換 + ; = Page Down
-
-; 英語キーボード用
-; ~vk1D & Y::Send,{Blind}{Home}    ; 無変換 + Y = Home
-; ~vk1D & vkBA::Send,{Blind}{End}  ; 無変換 + ; = End
-; ~vk1C & Y::Send,{Blind}{PgUp}    ; 変換 + Y = Page Up
-; ~vk1C & vkBA::Send,{Blind}{PgDn} ; 変換 + ; = Page Down
 
 ;------------------------------------------------------------------------------
 ;   第２弾 マウスカーソル
@@ -266,22 +260,17 @@ Alt & Tab::AltTabAndMenu
     }
     Return
 
-; 以下は筆者のキーボード配列向け
-; 変換 + Del =  左クリック（押し続けるとドラッグ）
-~vk1C & BS::MouseClick,left,,,,,D
-~vk1C & BS Up::MouseClick,left,,,,,U
-
-; 以下は日本語キーボード・英語キーボード向け
 ; 変換 + Enter = 左クリック（押し続けるとドラッグ）
-; ~vk1C & Enter::MouseClick,left,,,,,D
-; ~vk1C & Enter Up::MouseClick,left,,,,,U
+~vk1C & Enter::MouseClick,left,,,,,D
+~vk1C & Enter Up::MouseClick,left,,,,,U
 
 ; 変換 + E = 右クリック
 ~vk1C & E::MouseClick,right
 
 ; カーソルキーでファイルを選択した場合の右クリックメニュー表示
 ; Windows10のエクスプローラーの場合メニュー表示後ショートカットキーで項目を選択できる
-~vk1D & F::Send,{Blind}{AppsKey}    ;無変換 + F = アプリケーションキー
+~vk1C & F::Send,{Blind}{AppsKey}    ; 変換 + F = アプリケーションキー
+
 
 ;------------------------------------------------------------------------------
 ;   第３弾 ファンクションキー列
@@ -293,9 +282,7 @@ Alt & Tab::AltTabAndMenu
 ;       ESCキーがファンクションキー列にある場合遠いのでCtrlキーの空打ちで入力できるようにする
 ;------------------------------------------------------------------------------
 
-
-; 最初は変換・無変換と数字キーでファンクションキーを入力する
-; 英語キーボード向け
+; 変換・無変換と数字キーでファンクションキーを入力する
 vk1C & 1::Send, {Blind}{F1}      ; 変換 + 1 = F1
 vk1C & 2::Send, {Blind}{F2}      ; 変換 + 2 = F2
 vk1C & 3::Send, {Blind}{F3}      ; 変換 + 3 = F3
@@ -307,13 +294,7 @@ vk1C & 8::Send, {Blind}{F8}      ; 変換 + 8 = F8
 vk1C & 9::Send, {Blind}{F9}      ; 変換 + 9 = F9
 vk1C & 0::Send, {Blind}{F10}     ; 変換 + 0 = F10
 vk1C & -::Send, {Blind}{F11}     ; 変換 + - = F11
-vk1C & =::Send, {Blind}{F12}     ; 変換 + =キー = F12
-
-; 日本語キーボードの場合
-; vk1C & -::Send, {Blind}{F11}     ; 変換 + - = F11
-; vk1C & ^::Send, {Blind}{F12}     ; 変換 + ^ = F12
-
-; 英語キーボード向け
+vk1C & ^::Send, {Blind}{F12}     ; 変換 + ^ = F12
 vk1D & 1::Send, {Blind}{F1}      ; 無変換 + 1 = F1
 vk1D & 2::Send, {Blind}{F2}      ; 無変換 + 2 = F2
 vk1D & 3::Send, {Blind}{F3}      ; 無変換 + 3 = F3
@@ -325,11 +306,7 @@ vk1D & 8::Send, {Blind}{F8}      ; 無変換 + 8 = F8
 vk1D & 9::Send, {Blind}{F9}      ; 無変換 + 9 = F9
 vk1D & 0::Send, {Blind}{F10}     ; 無変換 + 0 = F10
 vk1D & -::Send, {Blind}{F11}     ; 無変換 + - = F11
-vk1D & =::Send, {Blind}{F12}     ; 無変換 + =キー = F12
-
-; 日本語キーボードの場合
-; vk1D & -::Send, {Blind}{F11}     ; 無変換 + - = F11
-; vk1D & ^::Send, {Blind}{F12}     ; 無変換 + ^ = F12
+vk1D & ^::Send, {Blind}{F12}     ; 無変換 + ^ = F12
 
 ; Ctrlを空打ちした場合ESCキーを入力する
 $Ctrl::
@@ -345,7 +322,8 @@ $Ctrl::
 
 ; Alt + F4 専用キーマップ
 ; Ctrl + W がタブやウィンドウを閉じるショートカットであることが多いため
-~vk1D & W::Send, {Blind}!{F4}     ;無変換 + W = Alt + F4
+~vk1D & W::Send, {Blind}!{F4}     ; 無変換 + W = Alt + F4
+
 
 ;------------------------------------------------------------------------------
 ;   第４弾 記号入力関連
@@ -358,20 +336,22 @@ $Ctrl::
 ;------------------------------------------------------------------------------
 
 ; BSキーとDelキーを同じ配置で使う
-~vk1D & BackSpace::Delete          ;無変換 + BS = Delete
+; ~vk1D & BackSpace::Delete          ;無変換 + BS = Delete
+~vk1D & h::Backspace ; 無変換 + H = Backspace
+~vk1D & d::Del       ; 無変換 + D = Delete
 
 ; 数字キー行と同じ列で記号キーを定義
 ; 英語キーボード用
-~vk1C & Z::Send,{Blind}+{1}        ; 変換 + Z = !
-~vk1C & X::Send,{Blind}+{2}        ; 変換 + X = @
-~vk1C & C::Send,{Blind}+{3}        ; 変換 + C = #
-~vk1C & V::Send,{Blind}+{4}        ; 変換 + V = $
-~vk1C & B::Send,{Blind}+{5}        ; 変換 + B = %
-~vk1D & N::Send,{Blind}+{6}        ; 無変換 + N = ^
-~vk1D & M::Send,{Blind}+{7}        ; 無変換 + M = &
-~vk1D & ,::Send,{Blind}+{8}        ; 無変換 + , = *
-~vk1D & .::Send,{Blind}+{9}        ; 無変換 + . = (
-~vk1D & /::Send,{Blind}+{0}        ; 無変換 + / = )
+; ~vk1C & Z::Send,{Blind}+{1}        ; 変換 + Z = !
+; ~vk1C & X::Send,{Blind}+{2}        ; 変換 + X = @
+; ~vk1C & C::Send,{Blind}+{3}        ; 変換 + C = #
+; ~vk1C & V::Send,{Blind}+{4}        ; 変換 + V = $
+; ~vk1C & B::Send,{Blind}+{5}        ; 変換 + B = %
+; ~vk1D & N::Send,{Blind}+{6}        ; 無変換 + N = ^
+; ~vk1D & M::Send,{Blind}+{7}        ; 無変換 + M = &
+; ~vk1D & ,::Send,{Blind}+{8}        ; 無変換 + , = *
+; ~vk1D & .::Send,{Blind}+{9}        ; 無変換 + . = (
+; ~vk1D & /::Send,{Blind}+{0}        ; 無変換 + / = )
 
 ; 日本語キーボード用
 ; 入力される記号が異なる
@@ -389,14 +369,14 @@ $Ctrl::
 ; ホームポジション付近によく使う記号を集約
 ; 日本語入力においては「ー」が打ちやすい位置にあるのが地味に便利
 ; 英語キーボード用
-~vk1C & F::Send,{Blind}{-}         ; 変換 + F = -
-~vk1C & G::Send,{Blind}{=}         ; 変換 + G = =
-~vk1C & R::Send,{Blind}+{-}        ; 変換 + R = _
-~vk1C & T::Send,{Blind}+{=}        ; 変換 + T = +
-~vk1D & U::Send,{Blind}+{vkDE}     ; 無変換 + U = "
-~vk1D & I::Send,{Blind}{vkDE}      ; 無変換 + I = '
-~vk1D & O::Send,{Blind}+{vkBA}     ; 無変換 + O = :
-~vk1D & P::Send,{Blind}{vkBA}      ; 無変換 + P = ;
+; ~vk1C & F::Send,{Blind}{-}         ; 変換 + F = -
+; ~vk1C & G::Send,{Blind}{=}         ; 変換 + G = =
+; ~vk1C & R::Send,{Blind}+{-}        ; 変換 + R = _
+; ~vk1C & T::Send,{Blind}+{=}        ; 変換 + T = +
+; ~vk1D & U::Send,{Blind}+{vkDE}     ; 無変換 + U = "
+; ~vk1D & I::Send,{Blind}{vkDE}      ; 無変換 + I = '
+; ~vk1D & O::Send,{Blind}+{vkBA}     ; 無変換 + O = :
+; ~vk1D & P::Send,{Blind}{vkBA}      ; 無変換 + P = ;
 
 ; 日本語キーボード用
 ; ~vk1C & F::Send,{Blind}{-}         ; 変換 + F = -
@@ -410,16 +390,16 @@ $Ctrl::
 
 ; Tabとの組み合わせで括弧とその他の記号を入力する
 ; 筆者のキーボード配列用
-~Tab & H::Send,{Blind}{[}          ; Tab + H = [
-~Tab & J::Send,{Blind}{]}          ; Tab + J = ]
-~Tab & K::Send,{Blind}+{[}         ; Tab + K = {
-~Tab & L::Send,{Blind}+{]}         ; Tab + L = }
-~Tab & N::Send,{Blind}+{9}         ; Tab + N = (
-~Tab & M::Send,{Blind}+{0}         ; Tab + M = )
-~Tab & ,::Send,{Blind}+{,}         ; Tab + , = <
-~Tab & .::Send,{Blind}+{.}         ; Tab + . = >
-~Tab & \::Send,{Blind}{vkC0}       ; Tab + \ = `
-~Tab & /::Send,{Blind}+{vkC0}      ; Tab + / = ~
+; ~Tab & H::Send,{Blind}{[}          ; Tab + H = [
+; ~Tab & J::Send,{Blind}{]}          ; Tab + J = ]
+; ~Tab & K::Send,{Blind}+{[}         ; Tab + K = {
+; ~Tab & L::Send,{Blind}+{]}         ; Tab + L = }
+; ~Tab & N::Send,{Blind}+{9}         ; Tab + N = (
+; ~Tab & M::Send,{Blind}+{0}         ; Tab + M = )
+; ~Tab & ,::Send,{Blind}+{,}         ; Tab + , = <
+; ~Tab & .::Send,{Blind}+{.}         ; Tab + . = >
+; ~Tab & \::Send,{Blind}{vkC0}       ; Tab + \ = `
+; ~Tab & /::Send,{Blind}+{vkC0}      ; Tab + / = ~
 
 ; 英語キーボード用
 ; ~Tab & H::Send,{Blind}{[}          ; Tab + H = [
@@ -450,6 +430,7 @@ $Ctrl::
 ; スネークケースのコード書くときに割と便利
 ; ~vkE2::+vkE2                       ;右下の\キー = アンダーバー
 
+
 ;------------------------------------------------------------------------------
 ;   第５弾 数字キー行
 ;       数字キー行の記号をホームポジションから入力できるようになると、
@@ -460,13 +441,20 @@ $Ctrl::
 ;------------------------------------------------------------------------------
 
 ; Tabとの組み合わせで数字キー入力
-~Tab & Q::Send,{Blind}{1}          ; Tab + Q = 1
-~Tab & W::Send,{Blind}{2}          ; Tab + W = 2
-~Tab & E::Send,{Blind}{3}          ; Tab + E = 3
-~Tab & R::Send,{Blind}{4}          ; Tab + R = 4
-~Tab & T::Send,{Blind}{5}          ; Tab + T = 5
-~Tab & Y::Send,{Blind}{6}          ; Tab + Y = 6
-~Tab & U::Send,{Blind}{7}          ; Tab + U = 7
-~Tab & I::Send,{Blind}{8}          ; Tab + I = 8
-~Tab & O::Send,{Blind}{9}          ; Tab + O = 9
-~Tab & P::Send,{Blind}{0}          ; Tab + P = 0
+~Tab & M::Send,{Blind}{1} ; Tab + M = 1
+~Tab & ,::Send,{Blind}{2} ; Tab + , = 2
+~Tab & .::Send,{Blind}{3} ; Tab + . = 3
+~Tab & J::Send,{Blind}{4} ; Tab + J = 4
+~Tab & K::Send,{Blind}{5} ; Tab + K = 5
+~Tab & L::Send,{Blind}{6} ; Tab + L = 6
+~Tab & U::Send,{Blind}{7} ; Tab + U = 7
+~Tab & I::Send,{Blind}{8} ; Tab + I = 8
+~Tab & O::Send,{Blind}{9} ; Tab + O = 9
+~Tab & N::Send,{Blind}{0} ; Tab + N = 0
+
+~Tab & Y::Send,{Blind}{/}     ; Tab + Y = /
+~Tab & H::Send,{Blind}{*}     ; Tab + H = *
+~Tab & p::Send,{Blind}{-}     ; Tab + p = -
+~Tab & `;::Send,{Blind}{+}    ; Tab + ; = +
+~Tab & /::Send,{Blind}{Enter} ; Tab + / = Enter
+~Tab & @::Send,{Blind}{BS}    ; Tab + / = BS
