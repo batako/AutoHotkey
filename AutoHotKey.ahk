@@ -337,8 +337,8 @@ $Ctrl::
 
 ; BSキーとDelキーを同じ配置で使う
 ; ~vk1D & BackSpace::Delete          ;無変換 + BS = Delete
-~vk1D & h::Backspace ; 無変換 + H = Backspace
-~vk1D & d::Del       ; 無変換 + D = Delete
+~vk1D & H::Backspace ; 無変換 + H = Backspace
+~vk1D & D::Del       ; 無変換 + D = Delete
 ~vk1C & H::Backspace ; 変換 + H = Backspace
 ~vk1C & /::Send,{Blind}^{/}     ; 変換 + / = Ctr + /
 ~vk1C & `;::Send,{Blind}{Enter} ; 変換 + ; = Enter
