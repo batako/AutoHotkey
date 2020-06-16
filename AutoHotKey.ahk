@@ -339,6 +339,10 @@ $Ctrl::
 ; ~vk1D & BackSpace::Delete          ;無変換 + BS = Delete
 ~vk1D & h::Backspace ; 無変換 + H = Backspace
 ~vk1D & d::Del       ; 無変換 + D = Delete
+~vk1C & H::Backspace ; 変換 + H = Backspace
+~vk1C & /::Send,{Blind}^{/}     ; 変換 + / = Ctr + /
+~vk1C & `;::Send,{Blind}{Enter} ; 変換 + ; = Enter
+
 
 ; 数字キー行と同じ列で記号キーを定義
 ; 英語キーボード用
