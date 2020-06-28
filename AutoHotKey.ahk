@@ -461,4 +461,4 @@ $Ctrl::
 ~Tab & p::Send,{Blind}{-}     ; Tab + p = -
 ~Tab & `;::Send,{Blind}{+}    ; Tab + ; = +
 ~Tab & /::Send,{Blind}{Enter} ; Tab + / = Enter
-~Tab & @::Send,{Blind}{BS}    ; Tab + / = BS
+~Tab & @::Send,{Blind}{BS}    ; Tab + @ = BS
