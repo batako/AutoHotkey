@@ -132,6 +132,8 @@
 *~End::
 *~PgUp::
 *~PgDn::
+*~LWin::
+*~RWin::
     Return
 
 ; 変換を修飾キーとして扱うための準備
